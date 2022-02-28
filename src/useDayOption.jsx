@@ -7,7 +7,6 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 
 const reducer = (state, action) => {
-  console.log(action);
   switch (action.type) {
     case 'toggle-date':
       return {
@@ -29,6 +28,13 @@ const reducer = (state, action) => {
         ...state,
         timezone: action.payload,
       };
+    case 'set':
+      return {
+        ...state,
+        ...action.payload,
+      };
+    case 'reset':
+      return initState;
     default:
       throw new Error();
   }

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -14,6 +14,13 @@ function App() {
   const [dayOption, dispatch] = useDayOption();
 
   const toggleModal = () => setShowModal(!showModal);
+
+  useEffect(() => {
+    const payload = JSON.parse(
+      decodeURI(new URLSearchParams(window.location.search).get('option'))
+    );
+    dispatch({ type: 'set', payload })
+  }, [dispatch]);
 
   return (
     <Theme>

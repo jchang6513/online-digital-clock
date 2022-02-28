@@ -5,6 +5,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Autocomplete, Box, FormControlLabel, Switch, TextField } from '@mui/material';
 import timezones from 'timezones-list';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 export const ModalContent = (props) => {
   const { onClose, option, dispatchSetting } = props;
@@ -67,8 +68,10 @@ export const ModalContent = (props) => {
         </Box>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose}>Reset</Button>
-        <Button onClick={onClose}>Done</Button>
+        <CopyToClipboard text={`${window.location.origin}?option=${encodeURI(JSON.stringify(option))}`}>
+          <Button>Get Link</Button>
+        </CopyToClipboard>
+        <Button onClick={() => dispatchSetting({ type: 'reset' })}>Reset</Button>
       </DialogActions>
     </>
   );
