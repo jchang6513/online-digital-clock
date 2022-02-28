@@ -1,20 +1,25 @@
-import * as React from 'react';
+import React, { useMemo } from 'react';
 import Button from '@mui/material/Button';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { Box, FormControlLabel, Switch } from '@mui/material';
+import { Autocomplete, Box, FormControlLabel, Switch, TextField } from '@mui/material';
+import timezones from 'timezones-list';
 
 export const ModalContent = (props) => {
   const { onClose, option, dispatchSetting } = props;
+  const timezone = useMemo(() => (
+    timezones.find(tz => tz.tzCode === option.timezone)
+  ), [option.timezone]);
+
   return (
     <>
       <DialogTitle id="alert-dialog-title">
         {"Option"}
       </DialogTitle>
-      <DialogContent>
+      <DialogContent style={{ overflow: 'visible' }}>
         <Box display="flex">
-          <Box display="flex" flexDirection="column">
+          <Box display="flex" flexDirection="column" mr={2}>
             <FormControlLabel
               control={
                 <Switch
@@ -33,15 +38,30 @@ export const ModalContent = (props) => {
               }
               label="24小時制"
             />
-          </Box>
-          <Box display="flex" flexDirection="column">
             <FormControlLabel
-              control={<Switch defaultChecked />}
-              label="顯示日期"
+              control={
+                <Switch
+                  checked={option.second}
+                  onChange={() => dispatchSetting({ type: 'toggle-second'})}
+                />
+              }
+              label="顯示秒鐘"
             />
-            <FormControlLabel
-              control={<Switch defaultChecked />}
-              label="24小時制"
+          </Box>
+          <Box>
+            <Autocomplete
+              id="timezone-picker"
+              size="small"
+              options={timezones}
+              value={timezone}
+              onChange={(_, value) => {
+                if (value) {
+                  dispatchSetting({ type: 'set-timezone', payload: value.tzCode });
+                }
+              }}
+              sx={{ width: 320 }}
+              renderInput={(params) => <TextField {...params} label="Timezone" />}
+              disableClearable
             />
           </Box>
         </Box>
