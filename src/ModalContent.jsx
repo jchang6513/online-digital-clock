@@ -3,12 +3,16 @@ import Button from '@mui/material/Button';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { Autocomplete, Box, FormControlLabel, Switch, TextField } from '@mui/material';
+import Autocomplete from '@mui/material/Autocomplete';
+import Box from '@mui/material/Box';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
+import TextField from '@mui/material/TextField';
 import timezones from 'timezones-list';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 export const ModalContent = (props) => {
-  const { onClose, option, dispatchSetting } = props;
+  const { option, dispatchSetting } = props;
   const timezone = useMemo(() => (
     timezones.find(tz => tz.tzCode === option.timezone)
   ), [option.timezone]);

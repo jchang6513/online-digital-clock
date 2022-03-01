@@ -24,9 +24,8 @@ export const OptionDialog = (props) => {
         container	: customContainer,
       }}
     >
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<></>}>
         <ModalContent
-          onClose={onClose}
           option={option}
           dispatchSetting={dispatchSetting}
         />
