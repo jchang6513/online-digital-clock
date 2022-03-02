@@ -13,7 +13,6 @@ const theme = createTheme({
 
 export const Theme = ({children, ...props}) => (
   <ThemeProvider theme={theme} {...props}>
-    <style>@import url('http://fonts.cdnfonts.com/css/digital-numbers');</style>
     {children}
   </ThemeProvider>
 );

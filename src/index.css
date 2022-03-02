@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'Digital Numbers';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Digital Numbers'), url('https://fonts.cdnfonts.com/s/15953/DigitalNumbers-Regular.woff') format('woff');
+}
+
 body {
   margin: 0;
   font-family: 'Digital dream', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
